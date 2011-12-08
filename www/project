@@ -1,0 +1,20 @@
+Projects:
+- connect two device through wifi
+- listing local devices
+- data echange
+
+
+GapSocket:
+https://github.com/purplecabbage/phonegap-plugins/tree/master/iPhone/GapSocket
+
+Game Center
+
+LocalSocket
+
+
+NSNetServices
+  For ensuring that you'll use wifi instead of bluetooth, you need to desactivate it
+
+
+plugin
+  -
