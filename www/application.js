@@ -21,8 +21,8 @@ var multiplayer = {
     console.log(message);
   },
   createHost: function(success, fail) {
-    PhoneGap.exec(function() {}, function() {}, "MultiPlayer", "searchServices", ["onUpdateServices"]);
-    PhoneGap.exec(function() {}, function() {}, "MultiPlayer", "createService", ["onCreateService", "onMessage"]);  
+    PhoneGap.exec(function() {}, function() {}, "MultiPlayer", "searchServices", [{callbackOnUpdateServices: "onUpdateServices"}]);
+    PhoneGap.exec(function() {}, function() {}, "MultiPlayer", "createService", [{callbackOnCreateService: "onCreateService", callbackOnMessage: "onMessage"}]);  
   }
 };
 

@@ -98,15 +98,15 @@
 - (void)netServiceDidResolveAddress:(NSNetService *)service
 {
     // on a resolu l'adresse on peut cree els connection
-    
-    NSString *ip;
-    struct sockaddr_in *addr;
-    int port;
-    
-    addr = (struct sockaddr_in *) [[[service adresses] objectAtIndex:0]
-                                   bytes];
-    ip = [NSString stringWithCString:(char *) inet_ntoa(addr->sin_addr)];
-    NSLog(@"%@", ip);
+    NSLog(@"netServiceDidResolveAddress");
+//    NSString *ip;
+//    struct sockaddr_in *addr;
+//    int port;
+//    
+//    addr = (struct sockaddr_in *) [[[service adresses] objectAtIndex:0]
+//                                   bytes];
+//    ip = [NSString stringWithCString:(char *) inet_ntoa(addr->sin_addr)];
+//    NSLog(@"%@", ip);
 }
 
 -(void)dealloc {

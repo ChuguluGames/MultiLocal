@@ -9,7 +9,7 @@
 
 - (void)searchServices:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
 {
-    NSString *callbackJSOnUpdateServices = [arguments objectAtIndex:1];   
+    NSString *callbackJSOnUpdateServices = [options valueForKey:@"callbackOnUpdateServices"];  
     
     // Start the browsering
     Browser *browser = [[Browser alloc] init];
@@ -23,8 +23,8 @@
 
 - (void)createService:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
 {
-    NSString *callbackJSOnCreateService = [arguments objectAtIndex:1];
-    NSString *callbackJSOnMessage = [arguments objectAtIndex:2];
+    NSString *callbackJSOnCreateService = [options valueForKey:@"callbackOnCreateService"];
+    NSString *callbackJSOnMessage = [options valueForKey:@"callbackOnMessage"];
     
     // Start the service
     Service *service =  [[Service alloc] init];

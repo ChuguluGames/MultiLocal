@@ -3,6 +3,9 @@
 
 @implementation Service
 
+@synthesize callbackOnMessageConfig;
+@synthesize callbackOnCreateConfig;
+
 - (void)setCallbackOnCreate:(PGPlugin *)plugin andRespondTo:(NSString *)callbackJS
 {
     NSLog(@"Setting callback on service create");
