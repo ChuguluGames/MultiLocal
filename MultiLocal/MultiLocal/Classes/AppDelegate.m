@@ -51,13 +51,13 @@
     return [super application:application handleOpenURL:url];
 }
 
--(id) getCommandInstance:(NSString*)className
-{
-	/** You can catch your own commands here, if you wanted to extend the gap: protocol, or add your
-	 *  own app specific protocol to it. -jm
-	 **/
-	return [super getCommandInstance:className];
-}
+//-(id) getCommandInstance:(NSString*)className
+//{
+//	/** You can catch your own commands here, if you wanted to extend the gap: protocol, or add your
+//	 *  own app specific protocol to it. -jm
+//	 **/
+//	return [super getCommandInstance:className];
+//}
 
 /**
  Called when the webview finishes loading.  This stops the activity view and closes the imageview
@@ -106,7 +106,7 @@
 
 - (void)dealloc
 {
-	[ super dealloc ];
+
 }
 
 @end

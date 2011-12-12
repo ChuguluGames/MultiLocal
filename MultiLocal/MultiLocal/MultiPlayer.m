@@ -1,49 +1,57 @@
 #import "MultiPlayer.h"
 #import <PhoneGap/JSONKit.h>
-#import "NetworkBrowser.h"
+#import "Browser.h"
+#import "Service.h"
 
 #import <netinet/in.h>
 
 @implementation MultiPlayer
 
-@synthesize browser;
-@synthesize services;
-
-- (void)print:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options
+- (void)searchServices:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
 {
-    NSString *callbackId = [arguments objectAtIndex:0];
-    PluginResult *result = nil;
-    NSString *jsString = nil;
+    NSString *callbackJSOnUpdateServices = [arguments objectAtIndex:1];   
     
-    NSString *message = [arguments objectAtIndex:1];
+    // Start the browsering
+    Browser *browser = [[Browser alloc] init];
     
-    result = [PluginResult resultWithStatus: PGCommandStatus_OK messageAsString: [ message stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ];
-    jsString = [result toSuccessCallbackString:callbackId];     
+    // callback each time the list is updated
+    [browser setCallbackOnUpdate: self 
+                    andRespondTo: callbackJSOnUpdateServices];  
     
-    NSLog(message);
-    
-    [self writeJavascript: jsString];
+    [browser start];  
 }
 
-/* return to javascript the list of connected devices */
-- (void)getConnectedDevices:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options
+- (void)createService:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
 {
-    NetworkBrowser *browser = [[NetworkBrowser alloc] init];
-    NSMutableArray *devices = [browser getConnectedDevices];
+    NSString *callbackJSOnCreateService = [arguments objectAtIndex:1];
+    NSString *callbackJSOnMessage = [arguments objectAtIndex:2];
     
-    NSString *callbackId = [arguments objectAtIndex:0];
-    PluginResult *result = nil;
-    NSString *jsString = nil;
+    // Start the service
+    Service *service =  [[Service alloc] init];
     
-    // encode the array in json
-    NSString *response = [devices JSONString];
-        
-    NSLog(response);
+    // callback when the service is started
+    [service setCallbackOnCreate: self 
+                    andRespondTo: callbackJSOnCreateService]; 
+ 
+    // callback when a message arrived to the service
+    [service setCallbackOnMessage: self 
+                    andRespondTo: callbackJSOnMessage];     
     
-    result = [PluginResult resultWithStatus: PGCommandStatus_OK messageAsString: response ];
-    jsString = [result toSuccessCallbackString:callbackId];    
+    [service start];    
+}
+
+- (void)callback:(NSString *)jsFunction withArguments:(NSMutableArray *)arguments
+{
+    NSLog(@"Multiplayer callback called");
+
+    NSString *response = [arguments JSONString];
+
+    NSString* jsString = [[NSString alloc] initWithFormat:@"multiplayer.%@(%@);", jsFunction, response ];
     
-    [self writeJavascript: jsString];
+    NSLog(@"Sending to javascript the callback");
+    NSLog(@"calling: %@", jsString);
+    
+    [self.webView stringByEvaluatingJavaScriptFromString:jsString];
 }
 
 @end

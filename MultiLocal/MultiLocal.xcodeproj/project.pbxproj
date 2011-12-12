@@ -35,9 +35,8 @@
 		529960D21490BB94000A8D61 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 529960D11490BB94000A8D61 /* AppDelegate.m */; };
 		529960DC1490C239000A8D61 /* MultiPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 529960DB1490C239000A8D61 /* MultiPlayer.m */; };
 		529960DE1490D313000A8D61 /* www in Resources */ = {isa = PBXBuildFile; fileRef = 529960DD1490D313000A8D61 /* www */; };
-		5299615514912DF7000A8D61 /* NetworkBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5299615414912DF7000A8D61 /* NetworkBrowser.m */; };
-		529961581491346F000A8D61 /* ServerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 529961571491346F000A8D61 /* ServerController.m */; };
-		5299615B149134CC000A8D61 /* ClientController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5299615A149134CB000A8D61 /* ClientController.m */; };
+		5299615514912DF7000A8D61 /* Browser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5299615414912DF7000A8D61 /* Browser.m */; };
+		5299615E14913C58000A8D61 /* Service.m in Sources */ = {isa = PBXBuildFile; fileRef = 5299615D14913C58000A8D61 /* Service.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,12 +74,10 @@
 		529960DA1490C22A000A8D61 /* MultiPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiPlayer.h; sourceTree = "<group>"; };
 		529960DB1490C239000A8D61 /* MultiPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiPlayer.m; sourceTree = "<group>"; };
 		529960DD1490D313000A8D61 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../www; sourceTree = "<group>"; };
-		5299615314912DEF000A8D61 /* NetworkBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkBrowser.h; sourceTree = "<group>"; };
-		5299615414912DF7000A8D61 /* NetworkBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkBrowser.m; sourceTree = "<group>"; };
-		5299615614913468000A8D61 /* ServerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerController.h; sourceTree = "<group>"; };
-		529961571491346F000A8D61 /* ServerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerController.m; sourceTree = "<group>"; };
-		52996159149134BF000A8D61 /* ClientController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientController.h; sourceTree = "<group>"; };
-		5299615A149134CB000A8D61 /* ClientController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientController.m; sourceTree = "<group>"; };
+		5299615314912DEF000A8D61 /* Browser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Browser.h; sourceTree = "<group>"; };
+		5299615414912DF7000A8D61 /* Browser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Browser.m; sourceTree = "<group>"; };
+		5299615C14913C57000A8D61 /* Service.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Service.h; sourceTree = "<group>"; };
+		5299615D14913C58000A8D61 /* Service.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Service.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,12 +244,10 @@
 		5299613F14912104000A8D61 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				5299615314912DEF000A8D61 /* NetworkBrowser.h */,
-				5299615414912DF7000A8D61 /* NetworkBrowser.m */,
-				5299615614913468000A8D61 /* ServerController.h */,
-				529961571491346F000A8D61 /* ServerController.m */,
-				52996159149134BF000A8D61 /* ClientController.h */,
-				5299615A149134CB000A8D61 /* ClientController.m */,
+				5299615314912DEF000A8D61 /* Browser.h */,
+				5299615414912DF7000A8D61 /* Browser.m */,
+				5299615C14913C57000A8D61 /* Service.h */,
+				5299615D14913C58000A8D61 /* Service.m */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -351,9 +346,8 @@
 				529960B21490BB94000A8D61 /* main.m in Sources */,
 				529960D21490BB94000A8D61 /* AppDelegate.m in Sources */,
 				529960DC1490C239000A8D61 /* MultiPlayer.m in Sources */,
-				5299615514912DF7000A8D61 /* NetworkBrowser.m in Sources */,
-				529961581491346F000A8D61 /* ServerController.m in Sources */,
-				5299615B149134CC000A8D61 /* ClientController.m in Sources */,
+				5299615514912DF7000A8D61 /* Browser.m in Sources */,
+				5299615E14913C58000A8D61 /* Service.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,6 +436,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = /Users/Shared/PhoneGap/Frameworks;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -451,6 +446,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "MultiLocal/MultiLocal-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-weak_framework",
 					UIKit,
@@ -471,6 +467,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = /Users/Shared/PhoneGap/Frameworks;
@@ -480,6 +477,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "MultiLocal/MultiLocal-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-weak_framework",
 					UIKit,
@@ -516,6 +514,7 @@
 				529960D91490BB94000A8D61 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
