@@ -99,7 +99,6 @@
 {
     NSLog(@"SocketDidDisconnect:WithError: %@", err);
     [plugin trigger:@"onDisconnection" forObject:@"client" withData: [NSMutableArray new]];
-
 }
 
 #pragma mark - Send message
