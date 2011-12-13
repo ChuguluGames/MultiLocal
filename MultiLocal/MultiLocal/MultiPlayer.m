@@ -39,7 +39,11 @@
     NSLog(@"Native createServer method responded");      
 
     // Start the service
+<<<<<<< HEAD
     server =  [[Server alloc] initAndRespondTo:[self triggerBlock]];
+=======
+    server =  [[Server alloc] initWithPlugin:self];
+>>>>>>> temp
     
     [server start];   
 }

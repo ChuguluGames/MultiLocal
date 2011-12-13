@@ -64,17 +64,11 @@ Application.prototype.createServer = function() {
       $("#button-create_server").hide();
       $("#servers").hide();
       self.say("Server: " + self.server.name +" created");
-      // multiplayer.connectToServer(response[2]);
-      // console.log(response);
 
       self.startServerMessaging();
     }, 
     // on message from server
     onMessage: function(response) {
-      // console.log("the server received a message");
-
-      // console.log(response);
-
       self.say("Server received: " + response);
     },
     // on error
@@ -99,7 +93,6 @@ Application.prototype.stopServerMessaging = function() {
     clearInterval(self.server.timerMessaging);
 };
 
-
 /* connect to the server with his name (could be an IP + port?) */
 Application.prototype.connectToServer = function(serverName) {
   var self = this;
@@ -117,7 +110,6 @@ Application.prototype.connectToServer = function(serverName) {
     },
     // on message received from the server
     onMessage: function(response) {
-      // console.log("a message has been received from the server");
       self.say("Client received: " + response);    
     },
     // on error
