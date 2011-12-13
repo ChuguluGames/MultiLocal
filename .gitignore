@@ -1,7 +1,3 @@
-*.mode1v3
-*.pbxuser
-*.perspective
-*.perspectivev3
-*.pyc
-*~.nib/
+*.xcuserdata
 build/*
+xcuserdata/*
