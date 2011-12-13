@@ -15,7 +15,7 @@
 @synthesize socket;
 @synthesize plugin;
 
-- (id)initWithPlugin:(MultiPlayer *)aPlugin
+- (id)initAndRespondTo:(MultiPlayer *)aPlugin
 {
 	self = [super init];
 	if (self != nil)

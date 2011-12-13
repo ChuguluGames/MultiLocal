@@ -9,6 +9,7 @@
     Client *client;    
     Server *server;
     Browser *browser;
+    void (^triggerBlock)(NSString *, NSString *, NSMutableArray *);
 }
 
 - (void)send:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options;
@@ -21,5 +22,6 @@
 @property (readwrite, retain) Client *client;
 @property (readwrite, retain) Server *server;
 @property (readwrite, retain) Browser *browser;
+@property (readwrite, copy) void (^triggerBlock)(NSString *, NSString *, NSMutableArray *);
 
 @end
