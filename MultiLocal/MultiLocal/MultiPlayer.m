@@ -11,39 +11,13 @@
 @synthesize client;
 @synthesize server;
 @synthesize browser;
-@synthesize triggerBlock;
-
-- (id)initWithPlugin:(MultiPlayer *)aPlugin
-{
-	self = [super init];
-	if (self != nil)
-	{
-        [self createBlock];
-    }
-	return self;    
-}
-
-
-- (void)createBlock
-{
-    self.triggerBlock = ^(NSString *event, NSString *object, NSMutableArray *arguments) {
-        NSString *response = [arguments JSONString];
-        NSString* jsString = [[NSString alloc] initWithFormat:@"multiplayer.events.%@.%@(%@);", object, event, response ];
-        NSLog(@"calling: %@", jsString);
-        [self.webView stringByEvaluatingJavaScriptFromString:jsString];  
-    };
-}
 
 - (void)createServer:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
 {
     NSLog(@"Native createServer method responded");      
 
     // Start the service
-<<<<<<< HEAD
-    server =  [[Server alloc] initAndRespondTo:[self triggerBlock]];
-=======
     server =  [[Server alloc] initWithPlugin:self];
->>>>>>> temp
     
     [server start];   
 }
