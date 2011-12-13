@@ -17,7 +17,7 @@
     NSLog(@"Native createServer method responded");      
 
     // Start the service
-    server =  [[Server alloc] initAndNotificate:self];
+    server =  [[Server alloc] initWithPlugin:self];
     
     [server start];   
 }
