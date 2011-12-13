@@ -1,37 +1,24 @@
-#import "Browser.h"
 #import "MultiPlayer.h"
-
-#import <sys/types.h>
-#import <sys/socket.h>
-#import <netinet/in.h>
-#import <arpa/inet.h>
+#import "Browser.h"
 
 @implementation Browser
 
 @synthesize browser;
-@synthesize services;
-@synthesize streams;
+@synthesize servers;
+@synthesize plugin;
 
-@synthesize callbackOnUpdateConfig;
-
-- (id)init
+- (id)initWithPlugin:(MultiPlayer *)aPlugin
 {
 	self = [super init];
 	if (self != nil)
 	{
-        services = [NSMutableArray new];
-        streams = [NSMutableArray new];
-
+        servers = [NSMutableArray new];
+        plugin = aPlugin;
+        
         self.browser = [NSNetServiceBrowser new];
         self.browser.delegate = self;
     }
 	return self;    
-}
-
-- (void)setCallbackOnUpdate:(PGPlugin *)plugin andRespondTo:(NSString *)callbackJS
-{
-    NSLog(@"Setting callback on services list update");
-    callbackOnUpdateConfig = [[NSMutableArray alloc] initWithObjects:plugin, callbackJS, nil];
 }
 
 - (void)start
@@ -42,19 +29,22 @@
     
 }
 
+- (void)stop
+{
+    NSLog(@"Service search stopped");     
+    
+    [self.browser stop];
+}
+
 - (void)netServiceBrowser:(NSNetServiceBrowser *)browser didFindService:(NSNetService *)service moreComing:(BOOL)more 
 {
-    NSLog(@"New service detected");
-    
-    [service setDelegate:self];
-    [service resolveWithTimeout:10];    
-    
-    // add the service
-    [services addObject:service];
-    
-    if (more == NO)
-        [self sendServicesToCallback];
-
+    if ([[[service name] substringWithRange:NSMakeRange(0, 6)] isEqualToString:@"server"]) {
+        [service retain];
+        [service setDelegate:self];
+        [service resolveWithTimeout:10];            
+    } else {
+        NSLog(@"Service %@ detected", [service name]);
+    }
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)browser didRemoveService:(NSNetService *)service moreComing:(BOOL)more 
@@ -62,55 +52,49 @@
     NSLog(@"A service was removed");
        
     // remove the service
-    [services removeObject:service];
+    [servers removeObject:service];
     
-    if (more == NO)
-        [self sendServicesToCallback];    
+    [self updateServersList];  
 }
 
-- (void)sendServicesToCallback
+/* send the servers list to the plugin */
+- (void)updateServersList
 {
-    MultiPlayer *plugin = [callbackOnUpdateConfig objectAtIndex:0];
-    NSString *jsFunction = [callbackOnUpdateConfig objectAtIndex:1];
+    NSMutableArray *serverList = [NSMutableArray new];
     
-    NSMutableArray *servicesInfos = [NSMutableArray new];
-    
-    for (NSNetService *service in services) 
+    for (NSNetService *service in servers) 
     {
-        
-        [servicesInfos addObject:[[NSMutableArray alloc] initWithObjects:[service domain],[service type], [service name], nil]];
+        [serverList addObject:[[NSMutableArray alloc] initWithObjects:[service domain],[service type], [service name], nil]];
     }    
-
     
-    [plugin callback:jsFunction withArguments:servicesInfos];    
+    [plugin trigger:@"onUpdate" forObject:@"browser" withData: serverList];
 }
 
+/* starting the resolution of the service address */
 - (void)netServiceWillResolve:(NSNetService *)service
 {
     NSLog( @"Attempting to resolve address for %@", [service name] );
 }
 
+/* did not resolve the service address */
 - (void)netService:(NSNetService *)service didNotResolve:(NSDictionary *)errorDict
 {
     NSLog( @"There was an error while attempting to resolve address for %@", [service name] );
 }
 
+/* when the address of the service has been resolved */
 - (void)netServiceDidResolveAddress:(NSNetService *)service
 {
-    // on a resolu l'adresse on peut cree els connection
     NSLog(@"netServiceDidResolveAddress");
-//    NSString *ip;
-//    struct sockaddr_in *addr;
-//    int port;
-//    
-//    addr = (struct sockaddr_in *) [[[service adresses] objectAtIndex:0]
-//                                   bytes];
-//    ip = [NSString stringWithCString:(char *) inet_ntoa(addr->sin_addr)];
-//    NSLog(@"%@", ip);
+   
+    // add the service
+    [servers addObject:service];    
+    
+    [self updateServersList];  
 }
 
 -(void)dealloc {
-
+    [super dealloc];
 }
 
 @end

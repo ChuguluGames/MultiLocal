@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5242D13614962E0900F4CE3D /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 5242D13514962E0900F4CE3D /* Client.m */; };
+		5242D14F14963B2800F4CE3D /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 5242D14E14963B2800F4CE3D /* GCDAsyncSocket.m */; };
+		5242D15114963C1500F4CE3D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5242D15014963C1500F4CE3D /* CFNetwork.framework */; };
+		5242D15314967B5800F4CE3D /* www in Resources */ = {isa = PBXBuildFile; fileRef = 5242D15214967B5800F4CE3D /* www */; };
 		529960921490BB94000A8D61 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 529960911490BB93000A8D61 /* Foundation.framework */; };
 		529960941490BB94000A8D61 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 529960931490BB94000A8D61 /* UIKit.framework */; };
 		529960961490BB94000A8D61 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 529960951490BB94000A8D61 /* CoreGraphics.framework */; };
@@ -34,12 +38,17 @@
 		529960CE1490BB94000A8D61 /* PhoneGap.plist in Resources */ = {isa = PBXBuildFile; fileRef = 529960CD1490BB94000A8D61 /* PhoneGap.plist */; };
 		529960D21490BB94000A8D61 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 529960D11490BB94000A8D61 /* AppDelegate.m */; };
 		529960DC1490C239000A8D61 /* MultiPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 529960DB1490C239000A8D61 /* MultiPlayer.m */; };
-		529960DE1490D313000A8D61 /* www in Resources */ = {isa = PBXBuildFile; fileRef = 529960DD1490D313000A8D61 /* www */; };
 		5299615514912DF7000A8D61 /* Browser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5299615414912DF7000A8D61 /* Browser.m */; };
-		5299615E14913C58000A8D61 /* Service.m in Sources */ = {isa = PBXBuildFile; fileRef = 5299615D14913C58000A8D61 /* Service.m */; };
+		5299615E14913C58000A8D61 /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 5299615D14913C58000A8D61 /* Server.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5242D13414962E0900F4CE3D /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Client.h; sourceTree = "<group>"; };
+		5242D13514962E0900F4CE3D /* Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Client.m; sourceTree = "<group>"; };
+		5242D14D14963B2800F4CE3D /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		5242D14E14963B2800F4CE3D /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		5242D15014963C1500F4CE3D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		5242D15214967B5800F4CE3D /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../www; sourceTree = "<group>"; };
 		5299608D1490BB93000A8D61 /* MultiLocal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiLocal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		529960911490BB93000A8D61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		529960931490BB94000A8D61 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -73,11 +82,10 @@
 		529960D41490BB94000A8D61 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; name = README; path = Plugins/README; sourceTree = "<group>"; };
 		529960DA1490C22A000A8D61 /* MultiPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiPlayer.h; sourceTree = "<group>"; };
 		529960DB1490C239000A8D61 /* MultiPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiPlayer.m; sourceTree = "<group>"; };
-		529960DD1490D313000A8D61 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../www; sourceTree = "<group>"; };
 		5299615314912DEF000A8D61 /* Browser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Browser.h; sourceTree = "<group>"; };
 		5299615414912DF7000A8D61 /* Browser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Browser.m; sourceTree = "<group>"; };
-		5299615C14913C57000A8D61 /* Service.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Service.h; sourceTree = "<group>"; };
-		5299615D14913C58000A8D61 /* Service.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Service.m; sourceTree = "<group>"; };
+		5299615C14913C57000A8D61 /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
+		5299615D14913C58000A8D61 /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5242D15114963C1500F4CE3D /* CFNetwork.framework in Frameworks */,
 				529960921490BB94000A8D61 /* Foundation.framework in Frameworks */,
 				529960941490BB94000A8D61 /* UIKit.framework in Frameworks */,
 				529960961490BB94000A8D61 /* CoreGraphics.framework in Frameworks */,
@@ -115,7 +124,7 @@
 		5299607F1490BB93000A8D61 = {
 			isa = PBXGroup;
 			children = (
-				529960DD1490D313000A8D61 /* www */,
+				5242D15214967B5800F4CE3D /* www */,
 				529960AB1490BB94000A8D61 /* MultiLocal */,
 				529960901490BB93000A8D61 /* Frameworks */,
 				5299608E1490BB93000A8D61 /* Products */,
@@ -133,6 +142,8 @@
 		529960901490BB93000A8D61 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				529960B41490BB94000A8D61 /* PhoneGap.framework */,
+				5242D15014963C1500F4CE3D /* CFNetwork.framework */,
 				529960911490BB93000A8D61 /* Foundation.framework */,
 				529960931490BB94000A8D61 /* UIKit.framework */,
 				529960951490BB94000A8D61 /* CoreGraphics.framework */,
@@ -153,7 +164,6 @@
 		529960AB1490BB94000A8D61 /* MultiLocal */ = {
 			isa = PBXGroup;
 			children = (
-				529960B41490BB94000A8D61 /* PhoneGap.framework */,
 				529960B61490BB94000A8D61 /* Resources */,
 				529960CF1490BB94000A8D61 /* Classes */,
 				529960D31490BB94000A8D61 /* Plugins */,
@@ -244,10 +254,14 @@
 		5299613F14912104000A8D61 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				5242D14D14963B2800F4CE3D /* GCDAsyncSocket.h */,
+				5242D14E14963B2800F4CE3D /* GCDAsyncSocket.m */,
 				5299615314912DEF000A8D61 /* Browser.h */,
 				5299615414912DF7000A8D61 /* Browser.m */,
-				5299615C14913C57000A8D61 /* Service.h */,
-				5299615D14913C58000A8D61 /* Service.m */,
+				5299615C14913C57000A8D61 /* Server.h */,
+				5299615D14913C58000A8D61 /* Server.m */,
+				5242D13414962E0900F4CE3D /* Client.h */,
+				5242D13514962E0900F4CE3D /* Client.m */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -316,7 +330,7 @@
 				529960CA1490BB94000A8D61 /* Default@2x.png in Resources */,
 				529960CC1490BB94000A8D61 /* Capture.bundle in Resources */,
 				529960CE1490BB94000A8D61 /* PhoneGap.plist in Resources */,
-				529960DE1490D313000A8D61 /* www in Resources */,
+				5242D15314967B5800F4CE3D /* www in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,7 +361,9 @@
 				529960D21490BB94000A8D61 /* AppDelegate.m in Sources */,
 				529960DC1490C239000A8D61 /* MultiPlayer.m in Sources */,
 				5299615514912DF7000A8D61 /* Browser.m in Sources */,
-				5299615E14913C58000A8D61 /* Service.m in Sources */,
+				5299615E14913C58000A8D61 /* Server.m in Sources */,
+				5242D13614962E0900F4CE3D /* Client.m in Sources */,
+				5242D14F14963B2800F4CE3D /* GCDAsyncSocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

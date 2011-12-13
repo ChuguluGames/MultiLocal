@@ -1,56 +1,90 @@
 #import "MultiPlayer.h"
 #import <PhoneGap/JSONKit.h>
 #import "Browser.h"
-#import "Service.h"
+#import "Server.h"
+#import "Client.h"
 
 #import <netinet/in.h>
 
 @implementation MultiPlayer
 
-- (void)searchServices:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
+@synthesize client;
+@synthesize server;
+@synthesize browser;
+
+- (void)createServer:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
 {
-    NSString *callbackJSOnUpdateServices = [options valueForKey:@"callbackOnUpdateServices"];  
+    NSLog(@"Native createServer method responded");      
+
+    // Start the service
+    server =  [[Server alloc] initAndNotificate:self];
+    
+    [server start];   
+}
+
+#pragma mark - Connection
+
+- (void)connectToServer:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
+{
+    NSLog(@"Native connectToHost method responded");      
+    
+    NSString *serverName = [options valueForKey:@"name"];
+    
+    for (NSNetService *aServer in [browser servers]) 
+    {
+        if ([[aServer name] isEqualToString:serverName]) {
+            NSLog(@"Host found");
+            
+            client = [[Client alloc] initWithPlugin:self];
+            
+            [client connectTo:aServer];
+            
+        }
+    }        
+}
+
+#pragma mark - Send message
+- (void)sendToServer:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
+{
+    NSLog(@"Native send method responded");      
+    
+    [client send: [options valueForKey:@"message"]];
+}
+
+- (void)sendToClients:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
+{
+    NSLog(@"Native send method responded");      
+    
+    [server sendToAll: [options valueForKey:@"message"]];
+}
+
+
+#pragma mark - Search server   
+- (void)searchServers:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
+{
+    NSLog(@"Native searchServers method responded");    
     
     // Start the browsering
-    Browser *browser = [[Browser alloc] init];
+    browser = [[Browser alloc] initWithPlugin:self];
     
-    // callback each time the list is updated
-    [browser setCallbackOnUpdate: self 
-                    andRespondTo: callbackJSOnUpdateServices];  
-    
-    [browser start];  
+    [browser start];      
 }
 
-- (void)createService:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
+- (void)stopSearchServers:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
 {
-    NSString *callbackJSOnCreateService = [options valueForKey:@"callbackOnCreateService"];
-    NSString *callbackJSOnMessage = [options valueForKey:@"callbackOnMessage"];
+    NSLog(@"Native stopSearchServers method responded");      
     
-    // Start the service
-    Service *service =  [[Service alloc] init];
-    
-    // callback when the service is started
-    [service setCallbackOnCreate: self 
-                    andRespondTo: callbackJSOnCreateService]; 
- 
-    // callback when a message arrived to the service
-    [service setCallbackOnMessage: self 
-                    andRespondTo: callbackJSOnMessage];     
-    
-    [service start];    
+    [browser stop];  
 }
 
-- (void)callback:(NSString *)jsFunction withArguments:(NSMutableArray *)arguments
-{
-    NSLog(@"Multiplayer callback called");
 
+#pragma mark - Specific phonegap
+
+- (void)trigger:(NSString *)event forObject:(NSString *)object withData:(NSMutableArray *)arguments
+{
     NSString *response = [arguments JSONString];
-
-    NSString* jsString = [[NSString alloc] initWithFormat:@"multiplayer.%@(%@);", jsFunction, response ];
-    
-    NSLog(@"Sending to javascript the callback");
+    NSString* jsString = [[NSString alloc] initWithFormat:@"multiplayer.events.%@.%@(%@);", object, event, response ];
     NSLog(@"calling: %@", jsString);
-    
     [self.webView stringByEvaluatingJavaScriptFromString:jsString];
 }
 

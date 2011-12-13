@@ -14,6 +14,48 @@ natif
 => get hosts
 => callback on update
 
+on lance le browser
+on cherche un host
+pas de host, on cree un host
+on attend
+
+un host, on se connecte a lhost
+
+a chaque nouvel host, on update la liste
+a chaque nouveau device connecte on met a jour le nombre
+
+on doit creer un service sur demande
+soit on cree un service pour creer un host
+soit pour se connecter a un host
+on va utiliser la technique des noms
+
+lorsqu'on clique sur "create host", on cree un service "host_123";
+lorsqu'on clique sur un host, on cree un service "client_123";
+et voila
+
+donc quand on liste les host, on doit chequer le nom
+
+on doit echanger des donnees entre le serveur et les clients
+sachant qu'en fait tout le monde est un client 
+sauf que un est aussi le server
+
+donc on cree un host, on s'auto connecte au serveru
+ensuite, on peut verifier simplement en envoyant "nom du client + random" au serveur et on va juste nslog depuis le serveur avec un callback js
+
+on doit donc attriver un id au client pour chaque
+
+
+le server envoie des donnees a tous les connectes
+le client recoit du server et n'envoie qu'au serveur
+
+on a donc un event
+onMessage pour le client (message du server recu)
+onMessage pour le serveru (message recu d'un client)
+
+par exemple, on doit envoyer les coordonnees
+on envoie donc au serveur et le serveur envoie a tout le monde sauf le client/master
+le master recoit un evenement pour chaque coordonnee de chaqun
+mais il faut que le serveur redispatch pour chaque client
 
 
 */

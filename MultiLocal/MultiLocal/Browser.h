@@ -1,24 +1,23 @@
-#import <UIKit/UIKit.h>
-#import <PhoneGap/PGPlugin.h>
+#import <Foundation/Foundation.h>
 
-@interface Browser : NSObject<NSNetServiceBrowserDelegate>
+@class MultiPlayer;
+
+@interface Browser : NSObject<NSNetServiceBrowserDelegate, NSNetServiceDelegate>
 {
     NSNetServiceBrowser *browser;
-    NSMutableArray *services;
+    NSMutableArray *servers;
     NSMutableArray *streams;    
-    NSMutableArray *callbackOnUpdateConfig;    
+    MultiPlayer *plugin;    
 }
-
-- (id)init;
-- (void)setCallbackOnUpdate:(PGPlugin *)plugin andRespondTo:(NSString *)callbackJS;
+- (id)initWithPlugin:(MultiPlayer *)aPlugin;
 - (void)start;
+- (void)stop;
 - (void)netServiceBrowser:(NSNetServiceBrowser *)browser didFindService:(NSNetService *)service moreComing:(BOOL)more;
 - (void)netServiceBrowser:(NSNetServiceBrowser *)browser didRemoveService:(NSNetService *)service moreComing:(BOOL)more;
-- (void)sendServicesToCallback;
+- (void)updateServersList;
 
 @property (readwrite, retain) NSNetServiceBrowser *browser;
-@property (readonly, retain) NSMutableArray *services;
-@property (readonly, retain) NSMutableArray *streams;
-@property (readwrite, retain) NSMutableArray *callbackOnUpdateConfig;
+@property (readonly, retain) NSMutableArray *servers;
+@property (readwrite, retain) MultiPlayer *plugin; 
 
 @end
