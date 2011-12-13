@@ -6,7 +6,6 @@ function Multiplayer() {
   };
 };
 
-
 Multiplayer.prototype.exec = function(method, options) {
   PhoneGap.exec(function() {}, function() {}, "MultiPlayer", method, options);   
 };
