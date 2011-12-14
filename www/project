@@ -58,6 +58,9 @@ le master recoit un evenement pour chaque coordonnee de chaqun
 mais il faut que le serveur redispatch pour chaque client
 
 
+bon maintenant qu'on arrive a echanger des donnees, on va avoir un carré a lecran et le deplacer
+
+
 */
 
 
