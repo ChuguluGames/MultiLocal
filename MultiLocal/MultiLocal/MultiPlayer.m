@@ -46,18 +46,33 @@
 #pragma mark - Send message
 - (void)sendToServer:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
 {
-    NSLog(@"Native send method responded");      
+    NSLog(@"Native sendToServer method responded");      
     
     [client send: [options valueForKey:@"message"]];
 }
 
-- (void)sendToClients:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
+- (void)sendToAllClients:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
 {
-    NSLog(@"Native send method responded");      
-    
+    NSLog(@"Native sendToAllClients method responded");   
     [server sendToAll: [options valueForKey:@"message"]];
 }
 
+- (void)sendToClientsFromList:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
+{
+    NSLog(@"Native sendToAllClients method responded");   
+    NSEnumerator *e = [[options valueForKey:@"clients"] objectEnumerator];
+    NSString *clientName;
+    while (clientName = [e nextObject]) {
+        [server sendToWithName: clientName withMessage: [options valueForKey:@"message"]];
+    }
+}
+
+- (void)sendToClient:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
+{
+    NSLog(@"Native sendToClient method responded");      
+    
+    [server sendToWithName: [options valueForKey:@"clientName"] withMessage: [options valueForKey:@"message"]];
+}
 
 #pragma mark - Search server   
 - (void)searchServers:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
@@ -80,7 +95,7 @@
 
 #pragma mark - Specific phonegap
 
-- (void)trigger:(NSString *)event forObject:(NSString *)object withData:(NSMutableArray *)arguments
+- (void)trigger:(NSString *)event forObject:(NSString *)object withData:(NSMutableDictionary *)arguments
 {
     NSString *response = [arguments JSONString];
     NSString* jsString = [[NSString alloc] initWithFormat:@"multiplayer.events.%@.%@(%@);", object, event, response ];

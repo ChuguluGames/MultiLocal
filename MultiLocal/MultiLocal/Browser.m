@@ -64,10 +64,15 @@
     
     for (NSNetService *service in servers) 
     {
-        [serverList addObject:[[NSMutableArray alloc] initWithObjects:[service domain],[service type], [service name], nil]];
+        
+        [serverList addObject:[[NSMutableDictionary alloc] initWithObjectsAndKeys:
+                                [service domain], @"domain",
+                                [service type], @"type",
+                                [service name], @"name",
+                              nil]];
     }    
     
-    [plugin trigger:@"onUpdate" forObject:@"browser" withData: serverList];
+    [plugin trigger:@"onUpdate" forObject:@"browser" withData: [[NSMutableDictionary alloc] initWithObjectsAndKeys:serverList, @"servers", nil]];
 }
 
 /* starting the resolution of the service address */

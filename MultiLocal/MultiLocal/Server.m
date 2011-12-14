@@ -1,6 +1,7 @@
 #import "Server.h"
 #import "GCDAsyncSocket.h"
 #import "MultiPlayer.h"
+#import <PhoneGap/JSONKit.h>
 
 #define WELCOME_MSG 0
 #define ECHO_MSG 1
@@ -12,7 +13,7 @@
 @implementation Server
 
 @synthesize socket;
-@synthesize connectedSockets;
+@synthesize connectedClients;
 @synthesize service;
 @synthesize plugin;
 
@@ -36,7 +37,7 @@
     
     // Create an array to hold accepted incoming connections.
         
-    connectedSockets = [[NSMutableArray alloc] init];
+    connectedClients = [[NSMutableArray alloc] init];
         
     // Now we tell the socket to accept incoming connections.
     // We don't care what port it listens on, so we pass zero for the port number.
@@ -57,7 +58,7 @@
         [service publish];
                 
     } else {
-        [plugin trigger:@"onError" forObject:@"server" withData: [[NSMutableArray alloc] initWithObjects:err, nil]];        
+        [plugin trigger:@"onError" forObject:@"server" withData: [[NSMutableDictionary alloc] initWithObjectsAndKeys:err, @"error", nil]];        
         NSLog(@"Error: %@", err);
     }
 }
@@ -71,9 +72,16 @@
     
     // The newSocket automatically inherits its delegate & delegateQueue from its parent.
     
-    [newSocket readDataWithTimeout:-1 tag:0]; // read the message from the socket
+    [newSocket readDataWithTimeout:-1 tag:0]; // r\    // create the client name
+    NSInteger clientId = [connectedClients count] + 1;
+    NSString *clientName = [NSString stringWithFormat:@"client_%d", clientId];
     
-    [connectedSockets addObject:newSocket];
+    [plugin trigger:@"onConnection" forObject:@"server" withData: [[NSMutableDictionary alloc] initWithObjectsAndKeys: clientName, @"clientName", nil]];
+    
+    [connectedClients addObject:[[NSMutableDictionary alloc] initWithObjectsAndKeys:
+                                    clientName, @"name",
+                                    newSocket, @"socket",
+                                 nil]]; 
 }
 
 #pragma mark - Deconnection
@@ -82,26 +90,52 @@
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
 {
     NSLog(@"Socket disconnected %@ with error: %@", sock, err);
-    [connectedSockets removeObject:sock];
+
+    for (NSMutableDictionary *client in connectedClients) 
+    {
+        if([client valueForKey: @"socket"] == sock) {
+            [plugin trigger:@"onDisconnection" forObject:@"server" withData: [[NSMutableDictionary alloc] initWithObjectsAndKeys: 
+                                                                              [client valueForKey: @"name"], @"clientName", 
+                                                                              nil]];
+            [connectedClients removeObject:client];
+        }
+    }      
+    
 }
+
+#pragma mark - Sending message\
 
 /* send a message to each connected socket */
 - (void)sendToAll:(NSString *)message 
 {
-    for (GCDAsyncSocket *sock in connectedSockets) 
+    for (NSMutableDictionary *client in connectedClients) 
     {
-        [self sendTo:sock withMessage: message];
-    }        
+        [self sendTo:[client valueForKey: @"socket"] withMessage: message];
+    }          
 }
-
-#pragma mark - Sending message
 
 /* send a message to a specific socket */
 - (void)sendTo:(GCDAsyncSocket *)sock withMessage:(NSString *)message 
 {
+    NSLog(@"sending %@", message);    
     message = [NSString stringWithFormat:@"%@\r\n", message]; // adding the carriage return and the line feed    
+    
     NSData* messageData = [message dataUsingEncoding:NSUTF8StringEncoding];
     [sock writeData:messageData withTimeout:-1 tag:0];
+}
+
+/* send a message to a specific client */
+- (void)sendToWithName:(NSString *)clientName withMessage:(NSString *)message 
+{
+    NSLog(@"finding client socket by his name %@", clientName);\
+    for (NSMutableDictionary *client in connectedClients) 
+    {
+        if([[client valueForKey: @"name"] isEqualToString: clientName]) {
+            NSLog(@"client socket found");
+            [self sendTo:[client valueForKey: @"socket"] withMessage: message];
+            return;
+        }
+    }
 }
 
 /* when the server send a message */
@@ -120,7 +154,7 @@
     
     [sock readDataWithTimeout:-1 tag:0]; // read the next message
     
-    [plugin trigger:@"onMessage" forObject:@"server" withData: [[NSMutableArray alloc] initWithObjects:message, nil]];
+    [plugin trigger:@"onMessage" forObject:@"server" withData: [[NSMutableDictionary alloc] initWithObjectsAndKeys: message, @"message", nil]];
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag 
@@ -136,7 +170,15 @@
     NSLog(@"Bonjour Service Published: domain(%@) type(%@) name(%@) port(%i)",
               [ns domain], [ns type], [ns name], (int)[ns port]);
     
-    [plugin trigger:@"onCreate" forObject:@"server" withData: [[NSMutableArray alloc] initWithObjects:[ns domain], [ns type], [ns name], nil]];
+    NSMutableDictionary *server = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+                                     [ns domain], @"domain",
+                                     [ns type], @"type",
+                                     [ns name], @"name",
+                                   nil];
+    
+    [plugin trigger:@"onCreate" forObject:@"server" withData: [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+                                                                server, @"server",
+                                                               nil]];
 }
 
 /* if the bonjour service did not publish */
@@ -149,7 +191,7 @@
     NSLog(@"Failed to Publish Service: domain(%@) type(%@) name(%@) - %@",
                [ns domain], [ns type], [ns name], errorDict);
     
-    [plugin trigger:@"onError" forObject:@"server" withData: [[NSMutableArray alloc] initWithObjects:errorDict, nil]];
+    [plugin trigger:@"onError" forObject:@"server" withData: [[NSMutableDictionary alloc] initWithObjectsAndKeys:errorDict, @"error", nil]];
 }
 
 - (void)dealloc 

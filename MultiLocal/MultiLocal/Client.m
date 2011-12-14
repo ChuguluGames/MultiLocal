@@ -15,7 +15,7 @@
 @synthesize socket;
 @synthesize plugin;
 
-- (id)initAndRespondTo:(MultiPlayer *)aPlugin
+- (id)initWithPlugin:(MultiPlayer *)aPlugin
 {
 	self = [super init];
 	if (self != nil)
@@ -87,7 +87,7 @@
     
     [sock readDataWithTimeout:-1 tag:0]; // read the first message
     
-    [plugin trigger:@"onConnection" forObject:@"client" withData: [NSMutableArray new]];
+    [plugin trigger:@"onConnection" forObject:@"client" withData: [NSMutableDictionary new]];
     
     connected = YES;   
 }
@@ -98,8 +98,7 @@
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
 {
     NSLog(@"SocketDidDisconnect:WithError: %@", err);
-    [plugin trigger:@"onDisconnection" forObject:@"client" withData: [NSMutableArray new]];
-
+    [plugin trigger:@"onDisconnection" forObject:@"client" withData: [NSMutableDictionary new]];
 }
 
 #pragma mark - Send message
@@ -130,7 +129,7 @@
     NSString *message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"didReadData: %@ to %@", message, sock);
     
-    [plugin trigger:@"onMessage" forObject:@"client" withData: [[NSMutableArray alloc] initWithObjects:message, nil]];
+    [plugin trigger:@"onMessage" forObject:@"client" withData: [[NSMutableDictionary alloc] initWithObjectsAndKeys:message, @"message", nil]];
 }
 
 @end
