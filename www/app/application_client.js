@@ -2,7 +2,7 @@
 Application.prototype.connectToServer = function(serverName) {
   var self = this;
 
-  multiplayer.connectToServer({
+  self.multi.connectToServer({
     clientName:   self.client.name,
     serverName:   serverName, 
     // when the client is connected to the host

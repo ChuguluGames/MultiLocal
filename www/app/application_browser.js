@@ -4,7 +4,7 @@ Application.prototype.searchServers = function() {
 
   console.log("calling native searchServers method");
 
-  multiplayer.searchServers({
+  self.multi.searchServers({
     onUpdate: function(response) {
       if(typeof response == "string") response = JSON.parse(response);
       
