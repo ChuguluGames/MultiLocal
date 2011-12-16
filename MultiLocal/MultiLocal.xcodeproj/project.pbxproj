@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		522E4B13149A3AD700632B25 /* www in Resources */ = {isa = PBXBuildFile; fileRef = 522E4B12149A3AD700632B25 /* www */; };
 		5242D13614962E0900F4CE3D /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 5242D13514962E0900F4CE3D /* Client.m */; };
 		5242D14F14963B2800F4CE3D /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 5242D14E14963B2800F4CE3D /* GCDAsyncSocket.m */; };
 		5242D15114963C1500F4CE3D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5242D15014963C1500F4CE3D /* CFNetwork.framework */; };
-		5242D15314967B5800F4CE3D /* www in Resources */ = {isa = PBXBuildFile; fileRef = 5242D15214967B5800F4CE3D /* www */; };
 		529960921490BB94000A8D61 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 529960911490BB93000A8D61 /* Foundation.framework */; };
 		529960941490BB94000A8D61 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 529960931490BB94000A8D61 /* UIKit.framework */; };
 		529960961490BB94000A8D61 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 529960951490BB94000A8D61 /* CoreGraphics.framework */; };
@@ -43,12 +43,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		522E4B12149A3AD700632B25 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
 		5242D13414962E0900F4CE3D /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Client.h; sourceTree = "<group>"; };
 		5242D13514962E0900F4CE3D /* Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Client.m; sourceTree = "<group>"; };
 		5242D14D14963B2800F4CE3D /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
 		5242D14E14963B2800F4CE3D /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		5242D15014963C1500F4CE3D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		5242D15214967B5800F4CE3D /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../www; sourceTree = "<group>"; };
 		5299608D1490BB93000A8D61 /* MultiLocal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiLocal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		529960911490BB93000A8D61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		529960931490BB94000A8D61 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -124,7 +124,7 @@
 		5299607F1490BB93000A8D61 = {
 			isa = PBXGroup;
 			children = (
-				5242D15214967B5800F4CE3D /* www */,
+				522E4B12149A3AD700632B25 /* www */,
 				529960AB1490BB94000A8D61 /* MultiLocal */,
 				529960901490BB93000A8D61 /* Frameworks */,
 				5299608E1490BB93000A8D61 /* Products */,
@@ -330,7 +330,7 @@
 				529960CA1490BB94000A8D61 /* Default@2x.png in Resources */,
 				529960CC1490BB94000A8D61 /* Capture.bundle in Resources */,
 				529960CE1490BB94000A8D61 /* PhoneGap.plist in Resources */,
-				5242D15314967B5800F4CE3D /* www in Resources */,
+				522E4B13149A3AD700632B25 /* www in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

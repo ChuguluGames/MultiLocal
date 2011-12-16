@@ -6,6 +6,26 @@
     <title>Spity</title>
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+
+    <script src="app/application.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script src="assets/libs/jquery-1.7.min.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script src="app/application_browser.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/application_server.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/application_client.js" type="text/javascript" charset="utf-8"></script>
+    
+    <!-- <script src="assets/libs/client.js" type="text/javascript" charset="utf-8"></script> -->
+    <script src="app/game.js" type="text/javascript" charset="utf-8"></script>
+    <script src="app/ball.js" type="text/javascript" charset="utf-8"></script>
+        
+    <script src="assets/libs/phonegap-1.2.0_android.js" type="text/javascript" charset="utf-8"></script>  
+    <script src="assets/libs/phonegap.multiplayer.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+      document.addEventListener("deviceready", function() {
+        application.init();
+      }, false);    
+    </script>
   </head>
   <body>  
 
@@ -13,16 +33,5 @@
 
     <div id="servers"></div>
     <div id="game"></div>
-
-    <script src="assets/libs/phonegap.multiplayer.js" type="text/javascript" charset="utf-8"></script>
-    <script src="assets/libs/jquery-1.7.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="app/application.js" type="text/javascript" charset="utf-8"></script>
-    <script src="app/application_browser.js" type="text/javascript" charset="utf-8"></script>
-    <script src="app/application_server.js" type="text/javascript" charset="utf-8"></script>
-    <script src="app/application_client.js" type="text/javascript" charset="utf-8"></script>
-    <script src="assets/libs/phonegap-1.2.0.js" type="text/javascript" charset="utf-8"></script>  
-    <!-- <script src="assets/libs/client.js" type="text/javascript" charset="utf-8"></script> -->
-    <script src="app/game.js" type="text/javascript" charset="utf-8"></script>
-    <script src="app/ball.js" type="text/javascript" charset="utf-8"></script>
   </body>
 </html>
