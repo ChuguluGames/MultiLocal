@@ -18,7 +18,6 @@
  */
 
 // Version 1.2.0
-
 if (typeof PhoneGap === "undefined") {
 
 /**
