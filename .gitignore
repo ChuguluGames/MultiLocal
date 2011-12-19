@@ -2,6 +2,8 @@
 build/*
 #ignore private workspace stuff added by Xcode4
 xcuserdata
+MultiLocal/*
+android/*
 
 ## generic files to ignore
 *~
