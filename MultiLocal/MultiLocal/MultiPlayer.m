@@ -98,7 +98,7 @@
 - (void)trigger:(NSString *)event forObject:(NSString *)object withData:(NSMutableDictionary *)arguments
 {
     NSString *response = [arguments JSONString];
-    NSString* jsString = [[NSString alloc] initWithFormat:@"multiplayer.events.%@.%@(%@);", object, event, response ];
+    NSString* jsString = [[NSString alloc] initWithFormat:@"application.multi.events.%@.%@(%@);", object, event, response ];
     NSLog(@"calling: %@", jsString);
     [self.webView stringByEvaluatingJavaScriptFromString:jsString];
 }

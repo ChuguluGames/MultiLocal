@@ -114,16 +114,6 @@
     }          
 }
 
-/* send a message to a specific socket */
-- (void)sendTo:(GCDAsyncSocket *)sock withMessage:(NSString *)message 
-{
-    NSLog(@"sending %@", message);    
-    message = [NSString stringWithFormat:@"%@\r\n", message]; // adding the carriage return and the line feed    
-    
-    NSData* messageData = [message dataUsingEncoding:NSUTF8StringEncoding];
-    [sock writeData:messageData withTimeout:-1 tag:0];
-}
-
 /* send a message to a specific client */
 - (void)sendToWithName:(NSString *)clientName withMessage:(NSString *)message 
 {
@@ -136,6 +126,16 @@
             return;
         }
     }
+}
+
+/* send a message to a specific socket */
+- (void)sendTo:(GCDAsyncSocket *)sock withMessage:(NSString *)message 
+{
+    NSLog(@"sending %@", message);    
+    message = [NSString stringWithFormat:@"%@\r\n", message]; // adding the carriage return and the line feed    
+    
+    NSData* messageData = [message dataUsingEncoding:NSUTF8StringEncoding];
+    [sock writeData:messageData withTimeout:-1 tag:0];
 }
 
 /* when the server send a message */

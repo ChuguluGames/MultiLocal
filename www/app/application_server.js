@@ -2,8 +2,8 @@
 Application.prototype.createServer = function() {
   var self = this;
 
-  multiplayer.stopSearchServers(); // don't need anymore to look for server
-  multiplayer.createServer({
+  self.multi.stopSearchServers(); // don't need anymore to look for server
+  self.multi.createServer({
     // on create server
     onCreate: function(response) {
       if(typeof response == "string") response = JSON.parse(response);
@@ -18,6 +18,8 @@ Application.prototype.createServer = function() {
       $("#game").show();
 
       self.createGame();
+
+      self.game.setColor(self.client.color);
       self.game.start();
     }, 
     // on client connection
@@ -25,37 +27,65 @@ Application.prototype.createServer = function() {
       if(typeof response == "string") response = JSON.parse(response);
 
       console.log("new client:" + response.clientName);
+        
+      var color = self.colors.shift();
+
+      var clientsName = [];
+      for(var i = 0; i < self.server.clients.length; i++) {
+        clientsName.push(self.server.clients[i].name);
+      }
 
       // tell the clients about the connection
-      multiplayer.sendToClients({
-        action: "newClient",
-        client: response.clientName
-      }, self.server.clients);
+      self.multi.sendToClients({
+        action: "clientConnected",
+        client: response.clientName,
+        color:  color
+      }, clientsName);
 
       // tell the user about his connection and his name
-      multiplayer.sendToClient(response.clientName, {
+      self.multi.sendToClient(response.clientName, {
         action:     "connection",
-        clientName: response.clientName
+        clientName: response.clientName,
+        color:      color,
+        clients:    [self.client].concat(self.server.clients)
       });
 
-      self.server.clients.push(response.clientName);
+      // create the player
+      var ball = new Ball();
+      ball.setColor(color);
+      self.players[response.clientName] = ball;      
+
+      // register the client
+      self.server.clients.push({
+        name:   response.clientName,
+        color:  color
+      });
     },
     // on client disconnection
     onDisconnection: function(response) {
       if(typeof response == "string") response = JSON.parse(response);
 
       for(var i = 0; i < self.server.clients.length; i++) {
-        if(self.server.clients[i] == response.clientName) {
+        if(self.server.clients[i].name == response.clientName) {
           
+          // remove it from the players list and the view
+          self.players[response.clientName].remove();
+          delete self.players[response.clientName];
+
           // delete it from the update list
           self.server.clients.splice (i, 1);
 
+          // create the clients name list
+          var clientsName = [];
+          for(var i = 0; i < self.server.clients.length; i++) {
+            clientsName.push(self.server.clients[i].name);
+          }
+
           // tell the clients about the deconnection
-          if (self.server.clients.length > 0)
-            multiplayer.sendToClients({
-              action: "deconnection",
-              client: response.clientName
-            }, self.server.clients);
+          self.multi.sendToClients({
+            action: "clientDisconnected",
+            client: response.clientName
+          }, clientsName);
 
           return;
         }
@@ -68,23 +98,19 @@ Application.prototype.createServer = function() {
       console.log("Server received: " + message);
 
       switch(message.action) {
-        case "newPlayer":
-        break;
         case "move": self.movePlayer(message); break;
       }
 
       // on doit renvoyer aux clients le message sauf le sender
-      var clients = [];
+      var clientsName = [];
 
-      for(var clientName in self.server.clients) {
-        if(client != message.client) {
-          clients.push(client);
+      for(var i = 0; i < self.server.clients.length; i++) {
+        if(self.server.clients[i].name != message.client) {
+          clientsName.push(self.server.clients[i].name);
         }
       }
 
-      if(clients.length > 0) {
-        multiplayer.sendToClients(message, clients);
-      }
+      self.multi.sendToClients(message, clientsName);
     },
     // on error
     onError: function(response) {

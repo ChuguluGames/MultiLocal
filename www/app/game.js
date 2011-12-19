@@ -17,6 +17,16 @@ function Game() {
   self.onUpdate = function() {};
 };
 
+Game.prototype.setColor = function(color) {
+  var self = this,
+      colorVisual = $("<div />", {
+    "class": "colorVisual"
+  }).css("background", color)
+    .appendTo($("#game")); 
+
+  self.ball.setColor(color);
+};
+
 Game.prototype.start = function() {
   var self = this;
 

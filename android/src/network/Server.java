@@ -43,7 +43,7 @@ public class Server {
     try {
       JmDNS jmdns = JmDNS.create();
 
-      ServiceInfo info = ServiceInfo.create("_http._tcp.local.", "server_android", 4242, "androidservice");
+      ServiceInfo info = ServiceInfo.create("_chuguluMulti._tcp.local.", "server_android", 4242, "androidservice");
       jmdns.registerService(info);
 
       
@@ -52,6 +52,38 @@ public class Server {
       connected = false;
     }     
   }
+
+  public void sendToAll() {
+    
+  }
+  
+  public void sendToWithName() {
+    
+  }    
+
+  public void sendTo() {
+    
+  }
+
+  public void onCreate() {
+    
+  }
+
+  public void onConnection() {
+    
+  }
+  
+  public void onDisconnection() {
+    
+  }
+  
+  public void onMessage() {
+    
+  }
+  
+  public void onError(String error) {
+    
+  }  
   
   public class ServerThread implements Runnable {
     public void run() {
@@ -88,7 +120,8 @@ public class Server {
         outClient = new PrintWriter(socketClient.getOutputStream(), true);
 
         connectedClient = true;
-
+        
+        // Start listenning the client  
         while (connectedClient) {
           String response = in.readLine();
           System.out.println(response);

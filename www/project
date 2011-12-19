@@ -1,4 +1,8 @@
 /*
+generating color by client
+show color at the top left
+fix three balls instance... maybe shared refrence?
+
 on a donc besoin du javascript de creer un host
 on lance le browser dhost
 on retourne a chaque nouvel host ou depart dhost la liste actualisee

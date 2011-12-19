@@ -1,9 +1,16 @@
 function Application() {
-  var self = this;
+  var self = this, 
+      color;
+
+  /* Available colors */
+  self.colors = ["yellow", "green", "blue", "red", "pink"];
+
+  color = self.colors.shift();
 
   /* Client */
   self.client = {
-    name: "client_0" // the server would be the client 0
+    name: "client_0", // the server would be the client 0
+    color: color // take the first color for the server
   };
 
   /* Server */
@@ -12,32 +19,21 @@ function Application() {
   /* Game */
   self.game = null;
 
-  /* Plyaers */
+  /* Players */
   self.players = {};
 
   console.log("application instancied");
-}
-
-/* wait until device ready */
-Application.prototype.wait = function() {
-  var self = this;
-
-  console.log("waiting device response...");
-
-  /* when device is ready */
-  document.addEventListener("deviceready", function() {
-    console.log("on device ready");
-
-    self.init();
-
-  }, false);
 };
 
 Application.prototype.init = function() {
   var self = this;
 
-  PhoneGap.addPlugin("Multiplayer", new Multiplayer());
-  self.multi = window.plugins.Multiplayer;
+  self.multi = new Multiplayer();
+
+  if(window.plugins === undefined) window.plugins = {};
+  window.plugins.Multiplayer = self.multi; 
+
+  console.log("bug");
 
   /* look for the available local servers */
   self.searchServers();  
@@ -62,7 +58,7 @@ Application.prototype.createGame = function() {
     };
 
     if(self.server)
-      self.multi.Multiplayer.sendToClients(message);
+      self.multi.sendToClients(message);
     else 
       self.multi.sendToServer(message);
   };

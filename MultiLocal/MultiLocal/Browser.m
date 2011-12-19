@@ -24,6 +24,7 @@
 - (void)start
 {
     NSLog(@"Service search started");    
+    [self.browser stop]; // stop the search before searching
     [self.browser searchForServicesOfType:@"_http._tcp." 
                                  inDomain:@""];
     

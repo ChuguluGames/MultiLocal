@@ -5,12 +5,21 @@ Application.prototype.searchServers = function() {
   console.log("calling native searchServers method");
 
   self.multi.searchServers({
+    onStart: function(response) {
+      // console.log(response);
+    },
     onUpdate: function(response) {
       if(typeof response == "string") response = JSON.parse(response);
-      
+      console.log(response)
       console.log("server lists updated");
       /* update the servers list */
       self.displayServers(response.servers);
+    },
+    onStop: function(response) {
+      
+    },
+    onError: function(response) {
+      
     }
   });
 };

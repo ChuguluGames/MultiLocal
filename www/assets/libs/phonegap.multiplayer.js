@@ -25,7 +25,10 @@ Multiplayer.prototype.createServer = function(params) {
 Multiplayer.prototype.searchServers = function(params) {
   var self = this;
 
+  self.events.browser.onStart = params.onStart;
   self.events.browser.onUpdate = params.onUpdate;
+  self.events.browser.onStop = params.onStop;
+  self.events.browser.onError = params.onError;
 
   self.exec("searchServers", [{}]);  
 };
@@ -41,6 +44,7 @@ Multiplayer.prototype.connectToServer = function(params) {
 
   self.events.client.onConnection = params.onConnection;
   self.events.client.onDisconnection = params.onDisconnection;  
+  self.events.client.onSend = params.onSend;
   self.events.client.onMessage = params.onMessage;
   self.events.client.onError = params.onError;
 

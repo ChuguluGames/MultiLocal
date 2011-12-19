@@ -17,6 +17,10 @@ Ball.prototype.show = function() {
   this.ball.show();
 };
 
+Ball.prototype.setColor = function(color) {
+  this.ball.css("background", color);
+};
+
 Ball.prototype.update = function() {
   var self = this;
 
@@ -24,4 +28,8 @@ Ball.prototype.update = function() {
     left: self.position.x + "px",
     top: self.position.y + "px"
   });
+};
+
+Ball.prototype.remove = function() {
+  this.ball.remove();
 };

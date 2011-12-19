@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		522E4B13149A3AD700632B25 /* www in Resources */ = {isa = PBXBuildFile; fileRef = 522E4B12149A3AD700632B25 /* www */; };
+		5240BED4149BA7BB0038EC79 /* www in Resources */ = {isa = PBXBuildFile; fileRef = 5240BED3149BA7BB0038EC79 /* www */; };
 		5242D13614962E0900F4CE3D /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 5242D13514962E0900F4CE3D /* Client.m */; };
 		5242D14F14963B2800F4CE3D /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 5242D14E14963B2800F4CE3D /* GCDAsyncSocket.m */; };
 		5242D15114963C1500F4CE3D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5242D15014963C1500F4CE3D /* CFNetwork.framework */; };
@@ -43,7 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		522E4B12149A3AD700632B25 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
+		5240BED3149BA7BB0038EC79 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../www; sourceTree = "<group>"; };
 		5242D13414962E0900F4CE3D /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Client.h; sourceTree = "<group>"; };
 		5242D13514962E0900F4CE3D /* Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Client.m; sourceTree = "<group>"; };
 		5242D14D14963B2800F4CE3D /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 		5299607F1490BB93000A8D61 = {
 			isa = PBXGroup;
 			children = (
-				522E4B12149A3AD700632B25 /* www */,
+				5240BED3149BA7BB0038EC79 /* www */,
 				529960AB1490BB94000A8D61 /* MultiLocal */,
 				529960901490BB93000A8D61 /* Frameworks */,
 				5299608E1490BB93000A8D61 /* Products */,
@@ -330,7 +330,7 @@
 				529960CA1490BB94000A8D61 /* Default@2x.png in Resources */,
 				529960CC1490BB94000A8D61 /* Capture.bundle in Resources */,
 				529960CE1490BB94000A8D61 /* PhoneGap.plist in Resources */,
-				522E4B13149A3AD700632B25 /* www in Resources */,
+				5240BED4149BA7BB0038EC79 /* www in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
