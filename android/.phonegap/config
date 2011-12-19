@@ -1,0 +1,6 @@
+VERSION=1.2.0
+PROJECT_PATH=/Users/davidbillamboz/Projects/MultiLocal/android
+PACKAGE=com.phonegap.multilocal
+ACTIVITY=MultiLocal
+TARGET=23
+PHONEGAP_PATH=assets/libs/
