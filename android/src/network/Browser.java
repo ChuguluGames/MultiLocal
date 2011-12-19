@@ -17,7 +17,7 @@ public class Browser  {
   public void startSearch() {
     System.out.println("Browser startSearch");
 
-    serversArray = new JSONArray()
+    serversArray = new JSONArray();
 
     onStart();
 
@@ -33,6 +33,7 @@ public class Browser  {
     try {
       JSONObject serverObject = new JSONObject();
 
+      // change it manually to connect to the ios server
       serverObject.put("name", "server_27");
       serverObject.put("address", "192.168.10.122");
       serverObject.put("port", 54787);

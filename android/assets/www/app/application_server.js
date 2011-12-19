@@ -50,10 +50,12 @@ Application.prototype.createServer = function() {
         clients:    [self.client].concat(self.server.clients)
       });
 
+      // create the player
       var ball = new Ball();
       ball.setColor(color);
       self.players[response.clientName] = ball;      
 
+      // register the client
       self.server.clients.push({
         name:   response.clientName,
         color:  color
@@ -66,6 +68,10 @@ Application.prototype.createServer = function() {
       for(var i = 0; i < self.server.clients.length; i++) {
         if(self.server.clients[i].name == response.clientName) {
           
+          // remove it from the players list and the view
+          self.players[response.clientName].remove();
+          delete self.players[response.clientName];
+
           // delete it from the update list
           self.server.clients.splice (i, 1);
 
@@ -92,8 +98,6 @@ Application.prototype.createServer = function() {
       console.log("Server received: " + message);
 
       switch(message.action) {
-        case "newPlayer":
-        break;
         case "move": self.movePlayer(message); break;
       }
 
@@ -110,6 +114,7 @@ Application.prototype.createServer = function() {
     },
     // on error
     onError: function(response) {
+      alert(response.error);
       console.log(response.error);
     }
   });

@@ -55,6 +55,7 @@ Application.prototype.connectToServer = function(serverName) {
     },
     // on error
     onError: function(response) {
+      alert(response.error);
       console.log(response.error);
       self.game.stop();
       $("#game").hide();

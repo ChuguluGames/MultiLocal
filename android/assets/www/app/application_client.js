@@ -55,7 +55,14 @@ Application.prototype.connectToServer = function(serverName) {
     },
     // on error
     onError: function(response) {
+      alert(response.error);
       console.log(response.error);
+      self.game.stop();
+      $("#game").hide();
+
+      $("#button-create_server").show();
+      $("#servers").show();   
+      self.searchServers();         
     },
     // on disconnection
     onDisconnection: function(response) {
@@ -78,6 +85,4 @@ Application.prototype.movePlayer = function(data) {
     self.players[data.client].position = data.position;
     self.players[data.client].update();  
   }
-
-
 };

@@ -30,7 +30,5 @@
 /Users/davidbillamboz/Projects/MultiLocal/android/assets/www/assets/images/ball.png \
 /Users/davidbillamboz/Projects/MultiLocal/android/assets/www/assets/libs/client.js \
 /Users/davidbillamboz/Projects/MultiLocal/android/assets/www/assets/libs/jquery-1.7.min.js \
-/Users/davidbillamboz/Projects/MultiLocal/android/assets/www/assets/libs/phonegap-1.2.0.js \
-/Users/davidbillamboz/Projects/MultiLocal/android/assets/www/assets/libs/phonegap-1.2.0_android.js \
 /Users/davidbillamboz/Projects/MultiLocal/android/assets/www/assets/libs/phonegap.multiplayer.js \
 /Users/davidbillamboz/Projects/MultiLocal/android/AndroidManifest.xml \

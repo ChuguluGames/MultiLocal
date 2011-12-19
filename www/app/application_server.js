@@ -114,6 +114,7 @@ Application.prototype.createServer = function() {
     },
     // on error
     onError: function(response) {
+      alert(response.error);
       console.log(response.error);
     }
   });

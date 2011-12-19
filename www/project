@@ -1,4 +1,6 @@
 /*
+dans le build on doit avoir une option pour specifier les deux fichiers js
+
 generating color by client
 show color at the top left
 fix three balls instance... maybe shared refrence?

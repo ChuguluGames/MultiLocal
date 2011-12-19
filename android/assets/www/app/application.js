@@ -23,9 +23,7 @@ function Application() {
   self.players = {};
 
   console.log("application instancied");
-
 };
-
 
 Application.prototype.init = function() {
   var self = this;

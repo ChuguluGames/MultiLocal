@@ -19,7 +19,7 @@ Application.prototype.searchServers = function() {
       
     },
     onError: function(response) {
-      
+      alert(response.error);
     }
   });
 };
